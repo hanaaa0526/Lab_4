@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSKTM IT Club</title>
+    <style>
+        /* --- CSS Variables for a consistent color theme --- */
+        :root {
+            --primary-dark: #0a192f;
+            --primary-teal: #00b4d8;
+            --accent-cyan: #90e0ef;
+            --text-light: #e6f1ff;
+            --text-dark: #333333;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+        }
+
+        /* Task 2 - Page Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            padding: 20px; /* Adds breathing room around the whole site */
+        }
+
+        /* Task 2 - Main Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px; /* Keeps it looking good on large screens */
+            margin: 0 auto;
+            min-height: 600px;
+            gap: 10px; /* Fulfills the 10px spacing between regions */
+            background-color: transparent;
+        }
+
+        /* --- CREATIVE ANIMATED HEADER --- */
+        .logo {
+            min-height: 120px; /* Slightly taller for impact */
+            background-size: cover;
+            background-position: center; 
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 50px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            background-image: url("header.jpg");
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(144, 224, 239, 0.8);
+            z-index: 1;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: var(--accent-cyan);
+            margin-top: 5px;
+            letter-spacing: 3px;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+            display: block;
+        }
+
+        /* Task 2 - Navigation */
+        .navigation {
+            min-height: 60px;
+            background: rgba(17, 43, 74, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(144, 224, 239, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding-left: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navigation a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-right: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Creative Hover Underline */
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-teal);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .navigation a:hover {
+            color: var(--primary-teal);
+        }
+
+        .navigation a:hover::after {
+            width: 100%;
+        }
+
+        /* Task 2 - Content Layout */
+        .content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            min-height: 400px;
+            gap: 10px; /* Replaces the need for space-between math, but keeps the gap exact */
+        }
+
+        /* --- CREATIVE SIDEBAR --- */
+        .side-bar {
+            width: 20%;
+            min-height: 400px;
+            background-color: var(--primary-dark);
+            border: 1px solid rgba(144, 224, 239, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-bar h3 {
+            color: var(--primary-teal);
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 180, 216, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .side-bar p {
+            font-size: 14px;
+            color: #a8b2c1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .side-bar ul {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+
+        .side-bar ul li {
+            margin-bottom: 12px;
+        }
+
+        .side-bar ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid transparent;
+        }
+
+        /* Creative Hover Slide Effect */
+        .side-bar ul li a:hover {
+            background-color: rgba(0, 180, 216, 0.1);
+            border-left: 3px solid var(--primary-teal);
+            transform: translateX(5px);
+            color: var(--accent-cyan);
+        }
+
+        .meeting-info {
+            margin-top: auto; /* Pushes to the bottom */
+            background: rgba(0, 180, 216, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed rgba(0, 180, 216, 0.4);
+            font-size: 13px;
+            color: var(--accent-cyan);
+            line-height: 1.6;
+        }
+
+        /* --- CREATIVE BODY AREA --- */
+        .body-area {
+            width: 70%; /* Note: 20% + 70% = 90%, the 10px flex gap handles the rest perfectly */
+            min-height: 400px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative corner accent */
+        .body-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, rgba(0, 180, 216, 0.1) 50%);
+            border-bottom-left-radius: 100%;
+        }
+
+        .body-area h4 {
+            color: var(--primary-teal);
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .body-area h2 {
+            color: var(--primary-dark);
+            font-size: 28px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .body-area h3 {
+            color: var(--primary-dark);
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Decorative line next to h3 */
+        .body-area h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 15px;
+        }
+
+        .body-area p {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Styled List */
+        .body-area ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .body-area ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Custom Checkmark Bullet */
+        .body-area ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: white;
+            background-color: var(--primary-teal);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .body-area a {
+            color: var(--primary-teal);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .body-area a:hover {
+            border-bottom: 2px solid var(--primary-teal);
+        }
+
+        /* Task 2 - Footer */
+        .footer {
+            min-height: 30px;
+            background-color: transparent;
+            color: #a8b2c1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* Rubric Requirement - Responsive layout for mobile */
+        @media (max-width: 850px) {
+            .content {
+                flex-direction: column;
+            }
+            .side-bar, .body-area {
+                width: 100%;
+                min-height: auto;
+            }
+            .side-bar {
+                padding: 20px;
+            }
+            .meeting-info {
+                margin-top: 20px;
+            }
+            .navigation {
+                padding-left: 20px;
+                overflow-x: auto; /* Allows scrolling if links overflow */
+            }
+            .logo h1 {
+                font-size: 24px;
+            }
+            .body-area {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Animated Header -->
+        <div class="logo">
+            <h1>FSKTM IT Club</h1>
+            <p>Learn. Build. Innovate. Together.</p>
+        </div>
+
+        <!-- Glass Navigation -->
+        <div class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Events</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            
+            <!-- Sidebar with hover animations -->
+            <div class="side-bar">
+                <h3>Club Corner</h3>
+                <p>Explore activities and opportunities available to our members.</p>
+                <ul>
+                    <li><a href="#">Upcoming Events</a></li>
+                    <li><a href="#">Learning Resources</a></li>
+                    <li><a href="#">Join the Club</a></li>
+                </ul>
+                <div class="meeting-info">
+                    <strong>Weekly meet-up</strong><br>
+                    Wednesday, 3:00 PM<br>
+                    Student Activity Room
+                </div>
+            </div>
+
+            <!-- Body Area with Drop Caps and Custom Bullets -->
+            <div class="body-area">
+                <h4>Welcome to our community</h4>
+                <h2>Discover Technology, Create Possibilities</h2>
+                <p>Welcome to Campus Tech Society! We are a student-led community that brings together people interested in web development, programming, design and emerging technology.</p>
+                
+                <h3>About Our Club</h3>
+                <p>Our mission is to help students build practical skills through hands-on workshops, mini projects and knowledge-sharing sessions. Everyone is welcome, including beginners.</p>
+                
+                <h3>Upcoming Activities</h3>
+                <ul>
+                    <li><strong>HTML & CSS Workshop:</strong> Create your first website.</li>
+                    <li><strong>Hackathon Day:</strong> Build an idea with your team.</li>
+                    <li><strong>Tech Talk:</strong> Learn from industry speakers.</li>
+                </ul>
+
+                <h3>Learning Resources</h3>
+                <p>Start learning with free tutorials at <a href="https://www.w3schools.com" target="_blank">W3 Schools</a>.</p>
+            </div>
+
+        </div>
+
+        <!-- Minimal Footer -->
+        <div class="footer">
+            &copy; 2026 FSKTM IT Club. All rights reserved.
+        </div>
+
+    </div>
+
+</body>
+</html>
